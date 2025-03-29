@@ -8,6 +8,3 @@ important commands
 ```bash
 cd $env:LOCALAPPDATA\nvim
 ```
-```
-```
-```
