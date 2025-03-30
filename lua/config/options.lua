@@ -14,3 +14,7 @@ vim.opt.shellxquote = ""
 
 -- line wrap
 vim.opt.wrap = true
+
+-- disable conceal in markdown files
+vim.opt.conceallevel = 0 -- Disable concealment completely
+vim.opt.concealcursor = "" -- Ensure it stays visible in all modes
