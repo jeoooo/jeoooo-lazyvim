@@ -30,16 +30,37 @@
 --   },
 -- }
 
+-- onedark option 1
+-- return {
+--   "navarasu/onedark.nvim",
+--   priority = 1000,
+--   config = function()
+--     require("onedark").setup({
+--       style = "cool", -- or any other style you prefer
+--       transparent = true, -- This enables global transparency
+--       -- transparent = false,
+--       term_colors = true,
+--     })
+--     require("onedark").load()
+--   end,
+-- }
+
+-- ondark option 2
 return {
-  "navarasu/onedark.nvim",
+  "olimorris/onedarkpro.nvim",
   priority = 1000,
   config = function()
-    require("onedark").setup({
-      style = "cool", -- or any other style you prefer
-      transparent = true, -- This enables global transparency
-      transparent = false,
-      term_colors = true,
+    require("onedarkpro").setup({
+      colors = {}, -- Keep default colors
+      options = {
+        transparency = true, -- Enable transparent background
+        -- transparency = false, -- Enable transparent background
+        terminal_colors = true, -- Apply colors to the terminal
+        theme = "onedark_dark", -- Use the "Onedark Dark" variant
+      },
     })
-    require("onedark").load()
+    vim.cmd("colorscheme onedark_dark") -- Apply the theme
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" }) -- Remove background
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" }) -- Remove floating windows' background
   end,
 }
