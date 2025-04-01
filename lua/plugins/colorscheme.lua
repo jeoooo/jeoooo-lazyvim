@@ -69,33 +69,20 @@
 -- TODO : NEEDS FIXING FOR onedark_dark Transparency
 return {
   -- Main theme (default: "onedark_dark")
-
   {
     "olimorris/onedarkpro.nvim",
     priority = 1000,
     config = function()
-      local current_theme = "onedark_dark"
-
-      local function apply_theme()
-        -- Set transparency based on theme
-        local transparency = (current_theme == "onedark_dark")
-
-        require("onedarkpro").setup({
-          options = {
-            transparency = transparency,
-            terminal_colors = true,
-            theme = current_theme,
-          },
-        })
-        vim.cmd("colorscheme " .. current_theme)
-        -- print("Theme: " .. current_theme .. " | Transparency: " .. (transparency and "On" or "Off"))
-      end
-
-      -- Apply default theme
-      apply_theme()
+      require("onedarkpro").setup({
+        options = {
+          transparency = false,
+          terminal_colors = true,
+          -- theme = "onedark_dark",
+        },
+      })
+      vim.cmd("colorscheme onedark_dark")
     end,
   },
-  -- Additional themes
   { "ray-x/aurora" },
   { "navarasu/onedark.nvim" },
   { "loctvl842/monokai-pro.nvim" },
@@ -105,6 +92,10 @@ return {
   { "thedenisnikulin/vim-cyberpunk" },
   { "akai54/2077.nvim" },
   { "iruzo/matrix-nvim" },
+  { "craftzdog/solarized-osaka.nvim" },
+  { "shaunsingh/nord.nvim" },
+  { "Mofiqul/vscode.nvim" },
+  { "rebelot/kanagawa.nvim" },
 }
 
 --
