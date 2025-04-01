@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
+    animate = {},
     dashboard = {
       enabled = true, -- Enable the dashboard
       width = 60,
@@ -71,5 +72,6 @@ return {
         { section = "startup" },
       },
     },
+    picker = {},
   },
 }
