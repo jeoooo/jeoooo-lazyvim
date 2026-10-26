@@ -6,11 +6,18 @@
 vim.opt.relativenumber = false -- Disable relative numbers
 vim.opt.number = true -- Enable absolute line numbers
 
--- use powershell on Windows only; keep the OS default shell (zsh/bash) on mac/linux
+-- use PowerShell on Windows; keep the OS default shell (zsh/bash) on mac/linux,
+-- except fish (CachyOS default), which isn't POSIX-compatible and breaks plugins that shell out
+if vim.fn.has("win32") ~= 1 and vim.o.shell:match("fish$") then
+  vim.opt.shell = vim.fn.executable("bash") == 1 and "bash" or "sh"
+end
 if vim.fn.has("win32") == 1 then
-  vim.opt.shell = "powershell"
-  vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
-  vim.opt.shellquote = '"'
+  vim.opt.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+  vim.opt.shellcmdflag =
+    "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSStyle.OutputRendering='plaintext';"
+  vim.opt.shellredir = "2>&1 | %%{ \"$_\" } | Out-File %s; exit $LastExitCode"
+  vim.opt.shellpipe = "2>&1 | %%{ \"$_\" } | Tee-Object %s; exit $LastExitCode"
+  vim.opt.shellquote = ""
   vim.opt.shellxquote = ""
 end
 

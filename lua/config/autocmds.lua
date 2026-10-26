@@ -11,6 +11,11 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.diagnostic.disable(0) -- Disable diagnostics for current buffer
+    -- Disable diagnostics for current buffer (API changed in nvim 0.11)
+    if vim.fn.has("nvim-0.11") == 1 then
+      vim.diagnostic.enable(false, { bufnr = 0 })
+    else
+      vim.diagnostic.disable(0)
+    end
   end,
 })
