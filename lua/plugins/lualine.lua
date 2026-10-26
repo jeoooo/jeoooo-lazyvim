@@ -27,7 +27,6 @@ return {
             }
             return os_icons[jit.os] or "" -- Fallback: question mark
           end,
-          "copilot", -- Show Copilot status
           "diagnostics", -- Show error, warning, hint, info count
         },
       },

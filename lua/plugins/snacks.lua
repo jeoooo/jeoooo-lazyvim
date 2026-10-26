@@ -72,6 +72,28 @@ return {
         { section = "startup" },
       },
     },
-    picker = {},
+    picker = {
+      sources = {
+        -- <leader>e file explorer: show dotfiles (and gitignored files),
+        -- but keep the truly noisy dirs out of the tree.
+        explorer = {
+          hidden = true, -- show dotfiles (.env, .github, .gitignore, ...)
+          ignored = true, -- also show gitignored files (e.g. .env.local)
+          exclude = { ".git", "node_modules" },
+        },
+        -- find files picker
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", "node_modules" },
+        },
+        -- live grep
+        grep = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", "node_modules" },
+        },
+      },
+    },
   },
 }

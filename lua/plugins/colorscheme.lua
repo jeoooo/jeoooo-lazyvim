@@ -68,23 +68,20 @@
 
 -- TODO : NEEDS FIXING FOR onedark_dark Transparency
 return {
-  -- Main theme (default: "onedark_dark")
+  -- Main theme (default: navarasu onedark)
   {
-    "olimorris/onedarkpro.nvim",
+    "navarasu/onedark.nvim",
     priority = 1000,
     config = function()
-      require("onedarkpro").setup({
-        options = {
-          transparency = false,
-          terminal_colors = true,
-          -- theme = "onedark_dark",
-        },
+      require("onedark").setup({
+        style = "dark",
+        term_colors = true,
       })
-      vim.cmd("colorscheme onedark_dark")
+      require("onedark").load()
     end,
   },
+  { "olimorris/onedarkpro.nvim" },
   { "ray-x/aurora" },
-  { "navarasu/onedark.nvim" },
   { "loctvl842/monokai-pro.nvim" },
   { "Mofiqul/dracula.nvim" },
   { "marko-cerovac/material.nvim" },
