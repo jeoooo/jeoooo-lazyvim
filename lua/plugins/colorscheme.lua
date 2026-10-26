@@ -77,8 +77,36 @@ return {
         style = "dark",
         term_colors = true,
       })
-      require("onedark").load()
     end,
+  },
+  -- persist the theme picked with the switcher (<leader>uC) across sessions
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = function()
+        local file = vim.fn.stdpath("data") .. "/colorscheme.txt"
+        local f = io.open(file, "r")
+        local saved = f and f:read("*l")
+        if f then
+          f:close()
+        end
+        if not (saved and saved ~= "" and pcall(vim.cmd.colorscheme, saved)) then
+          require("onedark").load() -- default
+        end
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          group = vim.api.nvim_create_augroup("persist_colorscheme", { clear = true }),
+          callback = function()
+            local out = io.open(file, "w")
+            if out and vim.g.colors_name then
+              out:write(vim.g.colors_name)
+            end
+            if out then
+              out:close()
+            end
+          end,
+        })
+      end,
+    },
   },
   { "olimorris/onedarkpro.nvim" },
   { "ray-x/aurora" },
